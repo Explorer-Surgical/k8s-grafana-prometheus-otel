@@ -12,4 +12,3 @@ spec:
     targetRevision: main
     path: charts/beyla
   project: default
-

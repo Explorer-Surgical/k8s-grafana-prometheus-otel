@@ -26,4 +26,3 @@ spec:
                     channel: '#alerts'
                     api_url: 'https://hooks.slack.com/services/XXXXX/YYYYY/ZZZZZ'
   project: default
-
