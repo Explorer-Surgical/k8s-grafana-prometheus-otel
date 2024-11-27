@@ -1,0 +1,6 @@
+# values.yaml for Beyla
+beyla:
+  tempo:
+    enabled: true
+  jaeger:
+    enabled: true

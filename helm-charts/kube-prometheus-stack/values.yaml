@@ -1,0 +1,22 @@
+# helm-charts/kube-prometheus-stack/values.yaml
+prometheus:
+  prometheusSpec:
+    retention: 7d
+    resources:
+      requests:
+        memory: 2Gi
+        cpu: 1
+alertmanager:
+  enabled: true
+  config:
+    global:
+      resolve_timeout: 5m
+    route:
+      receiver: 'slack-notifications'
+    receivers:
+      - name: 'slack-notifications'
+        slack_configs:
+          - send_resolved: true
+            channel: '#explorer-alert'
+            api_url: 'https://hooks.slack.com/services/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'
+

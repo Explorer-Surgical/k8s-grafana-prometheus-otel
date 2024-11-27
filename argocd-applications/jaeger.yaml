@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: jaeger
+  namespace: argocd
+spec:
+  destination:
+    namespace: observability
+    server: https://kubernetes.default.svc
+  source:
+    repoURL: 'https://github.com/jaegertracing/helm-charts'
+    targetRevision: main
+    path: charts/jaeger
+    helm:
+      values: |
+        jaeger:
+          allInOne:
+            enabled: true
+  project: default
+

@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kube-prometheus-stack
+  namespace: argocd
+spec:
+  destination:
+    namespace: monitoring
+    server: https://kubernetes.default.svc
+  source:
+    repoURL: 'https://github.com/prometheus-community/helm-charts'
+    targetRevision: main
+    path: charts/kube-prometheus-stack
+    helm:
+      values: |
+        prometheus:
+          prometheusSpec:
+            retention: 7d
+            resources:
+              requests:
+                memory: 2Gi
+                cpu: 1
+        alertmanager:
+          enabled: true
+  project: default
+

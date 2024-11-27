@@ -1,0 +1,11 @@
+# values.yaml for Jaeger
+jaeger:
+  allInOne:
+    enabled: true
+    storage:
+      type: cassandra
+      cassandra:
+        clusterName: "jaeger-cassandra"
+        address: "jaeger-cassandra.default.svc.cluster.local"
+    agent:
+      enabled: false
