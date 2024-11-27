@@ -1,0 +1,25 @@
+# values.yaml
+prometheus:
+  prometheusSpec:
+    retention: 15d  # Retain data for 15 days
+    replicas: 2      # Prometheus will run in a replica set
+    resources:
+      requests:
+        memory: "400Mi"
+        cpu: "200m"
+    serviceMonitorSelector:
+      matchLabels:
+        k8s-app: kube-prometheus-stack
+
+grafana:
+  enabled: true
+  adminPassword: 'admin'  # Change to a more secure password in production
+  resources:
+    requests:
+      memory: "200Mi"
+      cpu: "100m"
+
+alertmanager:
+  alertmanagerSpec:
+    replicas: 2
+
