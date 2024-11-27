@@ -1,8 +1,0 @@
-# values.yaml for Tempo
-tempo:
-  allInOne:
-    enabled: true
-  resources:
-    requests:
-      memory: 2Gi
-      cpu: 1
