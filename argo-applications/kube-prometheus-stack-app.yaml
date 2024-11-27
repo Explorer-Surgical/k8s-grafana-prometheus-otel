@@ -1,0 +1,24 @@
+# argo-applications/kube-prometheus-stack-app.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kube-prometheus-stack
+  namespace: argocd
+spec:
+  destination:
+    name: ''
+    namespace: monitoring  # This is the target namespace for the monitoring stack
+    server: 'https://kubernetes.default.svc'
+  project: default
+  source:
+    chart: kube-prometheus-stack  # Helm chart to deploy
+    repoURL: https://prometheus-community.github.io/helm-charts  # Helm chart repository URL
+    targetRevision: "v41.3.0"  # Version of the Helm chart
+    helm:
+      valueFiles:
+        - ./kube-prometheus-stack/values.yaml  # Path to your customized values.yaml
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
