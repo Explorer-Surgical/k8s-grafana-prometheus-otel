@@ -5,7 +5,7 @@ metadata:
   namespace: argocd
 spec:
   destination:
-    namespace: monitoring
+    namespace: monitoring  # Make sure this matches your namespace
     server: https://kubernetes.default.svc
   source:
     repoURL: 'https://github.com/prometheus-community/helm-charts'
@@ -23,4 +23,3 @@ spec:
         alertmanager:
           enabled: true
   project: default
-
