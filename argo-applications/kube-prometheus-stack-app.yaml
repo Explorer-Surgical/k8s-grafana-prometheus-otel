@@ -1,14 +1,21 @@
+# argo-applications/kube-prometheus-stack-app.yaml
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argocd
+  name: kube-prometheus-stack
   namespace: argocd
 spec:
+  destination:
+    name: ''
+    namespace: monitoring  # This is the target namespace for the monitoring stack
+    server: 'https://kubernetes.default.svc'
   project: default
   source:
-    repoURL: https://prometheus-community.github.io/helm-charts
-    targetRevision: 13.7.2
-    chart: kube-prometheus-stack
-destination:
-  server: https://kubernetes.default.svc
-  namespace: monitoring
+    chart: kube-prometheus-stack  # Helm chart to deploy
+    repoURL: https://github.com/prometheus-community/helm-charts/  # Helm chart repository URL
+    targetRevision: "66.2.2"  # Version of the Helm chart
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
