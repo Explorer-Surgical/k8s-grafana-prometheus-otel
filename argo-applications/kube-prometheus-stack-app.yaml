@@ -12,11 +12,11 @@ spec:
   project: default
   source:
     chart: kube-prometheus-stack  # Helm chart to deploy
-    repoURL: https://prometheus-community.github.io/helm-charts  # Helm chart repository URL
+    repoURL: https://github.com/prometheus-community/helm-charts/  # Helm chart repository URL
     targetRevision: "66.2.2"  # Version of the Helm chart
     helm:
       valueFiles:
-        - ./kube-prometheus-stack/values.yaml  # Path to your customized values.yaml
+        - ./charts/kube-prometheus-stack/values.yaml  # Path to your customized values.yaml
   syncPolicy:
     automated:
       prune: true
