@@ -1,21 +1,48 @@
-# argo-applications/kube-prometheus-stack-app.yaml
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: kube-prometheus-stack
+  name: grafana-k8s-monitoring
   namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
-  destination:
-    name: ''
-    namespace: monitoring  # This is the target namespace for the monitoring stack
-    server: 'https://kubernetes.default.svc'
-  project: default
-  source:
-    chart: kube-prometheus-stack  # Helm chart to deploy
-    repoURL: https://prometheus-community.github.io/helm-charts  # Helm chart repository URL
-    targetRevision: "66.2.2"  # Version of the Helm chart
+  project: infrastructure
+
+  ignoreDifferences:
+    - group: argoproj.io
+      jsonPointers:
+        - /status
+      kind: Application
+
   syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
     automated:
+      allowEmpty: true
       prune: true
       selfHeal: true
 
+  destination:
+    # No need to specify the server if it's the same cluster where ArgoCD is running
+    namespace: monitoring
+
+  source:
+    chart: k8s-monitoring
+    repoURL: https://grafana.github.io/helm-charts
+    targetRevision: 0.3.1
+    helm:
+      valuesObject:
+        prometheus-operator-crds:
+          enabled: true
+        cluster:
+          name: my-cluster # to be overridden
+        externalServices:
+          prometheus:
+            host: http://prometheus.monitoring.svc.cluster.local  # Internal Prometheus URL
+            # No basicAuth block for Prometheus (default authentication)
+          loki:
+            host: https://grafana.stage.explorersurgical.com/
+            basicAuth:
+              username: "nilesh"
+              password: "Nilesh@123"  # Provided Loki credentials
