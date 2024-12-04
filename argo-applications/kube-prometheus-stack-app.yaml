@@ -12,7 +12,7 @@ spec:
   project: default
   source:
     chart: kube-prometheus-stack  # Helm chart to deploy
-    repoURL: https://github.com/prometheus-community/helm-charts/  # Helm chart repository URL
+    repoURL: https://prometheus-community.github.io/helm-charts  # Helm chart repository URL
     targetRevision: "66.2.2"  # Version of the Helm chart
   syncPolicy:
     automated:
