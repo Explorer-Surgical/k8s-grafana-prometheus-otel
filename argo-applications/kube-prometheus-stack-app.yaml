@@ -6,7 +6,7 @@ metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  # Omitting the project will use the default project
+  project: default  # Explicitly set to 'default' project
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
