@@ -6,7 +6,7 @@ metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  project: infrastructure
+  project: default
 
   ignoreDifferences:
     - group: argoproj.io
@@ -36,7 +36,7 @@ spec:
         prometheus-operator-crds:
           enabled: true
         cluster:
-          name: my-cluster # to be overridden
+          name: explorer-stage-shared # to be overridden
         externalServices:
           prometheus:
             host: http://prometheus.monitoring.svc.cluster.local  # Internal Prometheus URL
