@@ -29,7 +29,7 @@ spec:
         cluster:
           name: "explorer-stage-shared"  # Set to your specific cluster name
         prometheus-operator-crds:
-          enabled: true
+          enabled: false
         externalServices:
           prometheus:
             host: http://prometheus.monitoring.svc.cluster.local  # Internal Prometheus URL
