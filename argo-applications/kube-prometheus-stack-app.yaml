@@ -17,7 +17,7 @@ spec:
       selfHeal: true
 
   destination:
-    # Omitting the server field will use the default connected cluster automatically
+    server: "https://kubernetes.default.svc"  # Explicitly set the server to default cluster
     namespace: monitoring
 
   source:
