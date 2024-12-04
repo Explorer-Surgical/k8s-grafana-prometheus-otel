@@ -6,14 +6,7 @@ metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  project: default
-
-  ignoreDifferences:
-    - group: argoproj.io
-      jsonPointers:
-        - /status
-      kind: Application
-
+  # Omitting the project will use the default project
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
@@ -24,7 +17,7 @@ spec:
       selfHeal: true
 
   destination:
-    # No need to specify the server if it's the same cluster where ArgoCD is running
+    # Omitting the server field will use the default connected cluster automatically
     namespace: monitoring
 
   source:
@@ -35,8 +28,6 @@ spec:
       valuesObject:
         prometheus-operator-crds:
           enabled: true
-        cluster:
-          name: explorer-stage-shared # to be overridden
         externalServices:
           prometheus:
             host: http://prometheus.monitoring.svc.cluster.local  # Internal Prometheus URL
