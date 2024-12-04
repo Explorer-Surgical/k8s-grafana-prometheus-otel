@@ -17,7 +17,7 @@ spec:
       selfHeal: true
 
   destination:
-    server: "https://kubernetes.default.svc"  # Explicitly set the server to default cluster
+    server: "https://kubernetes.default.svc"  # Explicitly set the server to the default cluster
     namespace: monitoring
 
   source:
@@ -26,6 +26,8 @@ spec:
     targetRevision: 0.3.1
     helm:
       valuesObject:
+        cluster:
+          name: "explorer-stage-shared"  # Set to your specific cluster name
         prometheus-operator-crds:
           enabled: true
         externalServices:
